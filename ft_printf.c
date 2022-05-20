@@ -6,7 +6,7 @@
 /*   By: ailopez- <ailopez-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:54:28 by ailopez-          #+#    #+#             */
-/*   Updated: 2022/05/19 20:55:14 by ailopez-         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:17:32 by ailopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "inc/ft_printf.h"
@@ -14,5 +14,12 @@
 
 int ft_printf(char const *, ...)
 {
+
+    char    *test;
+
+    test = ft_strdup("Prueba");
+
+
+
 
 }

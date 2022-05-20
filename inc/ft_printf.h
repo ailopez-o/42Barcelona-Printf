@@ -6,13 +6,14 @@
 /*   By: ailopez- <ailopez-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:56:02 by ailopez-          #+#    #+#             */
-/*   Updated: 2022/05/19 20:56:19 by ailopez-         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:28:11 by ailopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "inc/libft.h"
+
+# include "libft.h"
 # include <stdarg.h>
 # include <string.h>
 # include <stdio.h> 
