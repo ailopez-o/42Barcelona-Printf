@@ -6,7 +6,7 @@
 /*   By: ailopez- <ailopez-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:56:02 by ailopez-          #+#    #+#             */
-/*   Updated: 2022/05/23 19:58:27 by ailopez-         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:19:08 by aitorlope        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FT_PRINTF_H
@@ -21,8 +21,6 @@ typedef	struct{
 	char	type;
 } t_params;
 
-
-
 # include "libft.h"
 # include <stdarg.h>
 # include <string.h>
@@ -30,8 +28,10 @@ typedef	struct{
 # include <stdlib.h>
 # include <unistd.h>
 
-int ft_printf(const char *params, ...);
-int	ft_print_c (va_list	arg);
-int ft_print_s(va_list arg);
-int	ft_print_d(va_list arg);
+int		ft_printf(const char *params, ...);
+int		ft_print_c (va_list	arg);
+int		ft_print_s(va_list arg);
+int		ft_print_d(va_list arg);
+int		ft_print_u(va_list  arg);
+char	*ft_uitoa(unsigned int n);
 #endif

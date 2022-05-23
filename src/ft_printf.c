@@ -6,7 +6,7 @@
 /*   By: ailopez- <ailopez-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 20:54:28 by ailopez-          #+#    #+#             */
-/*   Updated: 2022/05/23 20:08:51 by ailopez-         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:24:30 by aitorlope        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/ft_printf.h"
@@ -50,7 +50,7 @@ char	*ft_print_arg(const char *str, va_list	arg)
 	if (params.type == 'i')
 		ft_print_d(arg);
 	if (params.type == 'u')
-		printf("Tipo u");
+		ft_print_u(arg);
 	if (params.type == 'x')
 		printf("Tipo x");
 	if (params.type == 'X')
