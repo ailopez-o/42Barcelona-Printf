@@ -13,11 +13,15 @@
 # define FT_PRINTF_H
 
 typedef	struct{
-	int		parameter;
-	char	flags;
+
+
 	int 	with;
+	char	fill;
+	int		positive;
+	int		leftjustify;
+	int		gap;
+	int		altformat;
 	int 	precision;
-	char	lenght[2];
 	char	type;
 } t_params;
 
