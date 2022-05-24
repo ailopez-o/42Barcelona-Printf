@@ -31,3 +31,47 @@ int	ft_print_u(va_list	arg)
 	free(num);
 	return(1);
 }
+
+int ft_print_x(va_list arg)
+{
+	char	*num;
+
+	num  = ft_itoa_hex(va_arg(arg, int));
+	ft_putstr_fd(num,1);
+	free(num);
+	return(1);
+}
+
+int ft_print_X(va_list arg)
+{
+	char	*num;
+	int 	i;
+
+	num  = ft_itoa_hex(va_arg(arg, int));
+	i = 0;
+	while(*(num + i))
+	{
+		*(num + i) = ft_toupper(*(num + i));
+		i++;
+	}
+	ft_putstr_fd(num,1);
+	free(num);
+	return(1);
+}
+
+int ft_print_p(va_list arg)
+{
+	char	*num;
+	char	*address;
+	char	*ptr;
+
+	ptr = va_arg(arg, char *);
+	num  = ft_itoa_hex((unsigned long)ptr);
+	address = malloc((ft_strlen(num) + 3) * sizeof(char));
+	ft_strlcpy(address,"0x",3);
+	ft_strlcat(address,num,ft_strlen(num) + 3);
+	ft_putstr_fd(address,1);
+	free (address);
+	free(num);
+	return(1);
+}

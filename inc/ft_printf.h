@@ -34,4 +34,8 @@ int		ft_print_s(va_list arg);
 int		ft_print_d(va_list arg);
 int		ft_print_u(va_list  arg);
 char	*ft_uitoa(unsigned int n);
+int		ft_print_x(va_list arg);
+int		ft_print_X(va_list arg);
+char	*ft_itoa_hex(unsigned long n);
+int		ft_print_p(va_list arg);
 #endif

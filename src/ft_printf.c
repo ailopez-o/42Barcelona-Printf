@@ -44,7 +44,7 @@ char	*ft_print_arg(const char *str, va_list	arg)
 	if (params.type == 's')
 		ft_print_s(arg);
 	if (params.type == 'p')
-		printf("Tipo p");
+		ft_print_p(arg);
 	if (params.type == 'd')
 		ft_print_d(arg);
 	if (params.type == 'i')
@@ -52,9 +52,9 @@ char	*ft_print_arg(const char *str, va_list	arg)
 	if (params.type == 'u')
 		ft_print_u(arg);
 	if (params.type == 'x')
-		printf("Tipo x");
+		ft_print_x(arg);
 	if (params.type == 'X')
-		printf("Tipo X");
+		ft_print_X(arg);
 	if (params.type == '%')
 		write(1,"%",1);
 	return ((char *)str + i);

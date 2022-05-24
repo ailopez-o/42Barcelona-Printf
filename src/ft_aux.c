@@ -48,3 +48,42 @@ char	*ft_uitoa(unsigned int n)
 	}
 	return (chrnum);
 }
+
+int	ft_itoa_hex_len(char **s, unsigned long n)
+{
+	int		len;
+
+	len = 0;
+	if (n == 0)
+		len = 2;	
+	while (n > 0)
+	{
+		n = n / 16;
+		len++;
+	}
+	len++;
+	*s = malloc(len * sizeof(char));
+	return (len);
+}
+
+char	*ft_itoa_hex(unsigned long n)
+{
+	int		len;
+	char	*chrnum;
+	char	hex[] = "123456789abcdef";
+
+	chrnum = NULL;
+	len = ft_itoa_hex_len(&chrnum, n);
+	if (chrnum == NULL)
+		return (NULL);
+	if (n == 0)
+		chrnum[0] = '0';	
+	chrnum[len - 1] = '\0';
+	while (n)
+	{
+		chrnum[len - 2] = hex[(n % 16) - 1];
+		n = n / 16;
+		len--;
+	}
+	return (chrnum);
+}
