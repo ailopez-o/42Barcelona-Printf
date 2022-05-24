@@ -41,10 +41,7 @@ char *ft_fill_str(int numsize, t_params *params)
 		ptraux = fill + (gap - params->precision);
 		ft_memset(ptraux,'0',params->precision - numsize);
 		if (ft_sign_print(params))
-		{
-			ptraux--;
-			*ptraux = params->sign;
-		}
+			*(ptraux -1)= params->sign;
 		// Ahora rellenaremos hasta el final (principio) de caracter vacio
 		ft_memset(fill,' ', ptraux - fill);
 	}
