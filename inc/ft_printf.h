@@ -21,6 +21,7 @@ typedef	struct{
 	int		altformat;
 	int 	precision;
 	char	type;
+	char	sign;
 } t_params;
 
 # include "libft.h"
@@ -32,9 +33,9 @@ typedef	struct{
 
 int		ft_printf(const char *params, ...);
 int		ft_print_c (va_list	arg);
-int		ft_print_s(va_list arg);
-int		ft_print_d(va_list arg);
-int		ft_print_u(va_list  arg);
+int		ft_print_s(va_list arg, t_params *params);
+int		ft_print_d(va_list arg, t_params *params);
+int		ft_print_u(va_list  arg, t_params *params);
 char	*ft_uitoa(unsigned int n);
 int		ft_print_x(va_list arg);
 int		ft_print_X(va_list arg);

@@ -32,7 +32,7 @@ int	ft_isflags(char	c)
 {
 	char	*ptr;
 	const char	flags[] = "0+-# ";
-	
+
 	ptr = (char *) &flags[0];
 	while(*ptr)
 	{
@@ -119,15 +119,15 @@ char	*ft_print_arg(const char *str, va_list	arg)
 	if (params.type == 'c')
 		ft_print_c(arg);
 	if (params.type == 's')
-		ft_print_s(arg);
+		ft_print_s(arg,&params);
 	if (params.type == 'p')
 		ft_print_p(arg);
 	if (params.type == 'd')
-		ft_print_d(arg);
+		ft_print_d(arg, &params);
 	if (params.type == 'i')
-		ft_print_d(arg);
+		ft_print_d(arg, &params);
 	if (params.type == 'u')
-		ft_print_u(arg);
+		ft_print_u(arg, &params);
 	if (params.type == 'x')
 		ft_print_x(arg);
 	if (params.type == 'X')

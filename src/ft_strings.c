@@ -20,8 +20,17 @@ int	ft_print_c (va_list	arg)
 	return (1);
 }
 
-int ft_print_s(va_list arg)
+int ft_print_s(va_list arg, t_params *params)
 {
-	ft_putstr_fd(va_arg(arg, char *), 1);
+	char	*toprint;
+	toprint = va_arg(arg, char *);
+	if (params->precision > 0)
+	{	
+		toprint = ft_substr(toprint, 0, params->precision);
+		ft_putstr_fd(toprint, 1);
+		free (toprint);
+	}	
+	else
+		ft_putstr_fd(toprint, 1);
 	return (1);
 }
