@@ -13,8 +13,6 @@
 # define FT_PRINTF_H
 
 typedef	struct{
-
-
 	int 	with;
 	char	fill;
 	int		positive;

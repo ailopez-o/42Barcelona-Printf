@@ -32,6 +32,7 @@ int	ft_isflags(char	c)
 {
 	char	*ptr;
 	const char	flags[] = "0+-# ";
+	
 	ptr = (char *) &flags[0];
 	while(*ptr)
 	{
@@ -146,8 +147,6 @@ int ft_printf(const char *toprint, ...)
 	char	*str;
 	
 	str = (char *)toprint;
-
-
 	va_start (argc, toprint);
 	n = 0;
 	while(*str)
