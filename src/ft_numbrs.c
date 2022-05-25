@@ -55,6 +55,7 @@ int	ft_print_x(va_list arg)
 	char	*num;
 
 	num = ft_itoa_hex(va_arg(arg, int));
+	num = ft_substr(num,8,8);
 	ft_putstr_fd(num, 1);
 	free(num);
 	return (1);
@@ -66,6 +67,7 @@ int	ft_print_xx(va_list arg)
 	int		i;
 
 	num = ft_itoa_hex(va_arg(arg, int));
+	num = ft_substr(num,8,8);
 	i = 0;
 	while (*(num + i))
 	{
