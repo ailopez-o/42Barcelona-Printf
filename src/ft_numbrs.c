@@ -11,6 +11,21 @@
 /* ************************************************************************** */
 #include "inc/ft_printf.h"
 
+char *ft_fill_reverse(char *str, char c, int size)
+{
+
+	//printf("\nSize [%d] - Relleno [%c] - Puntero [%p]\n",size, c, str);
+	while (size > 0)
+	{
+		//printf("\nSize [%d] - Relleno [%c] - Puntero [%p]\n",size, c, str);
+		*str = c;
+		str--;
+		size--;
+	}
+	return(str);
+}
+
+
 int ft_sign_print(t_params *params)
 {
 	// Verificamos si corresponde imprimir signo o no
@@ -25,33 +40,52 @@ char *ft_fill_str(int numsize, t_params *params)
 
 	// el hueco que tendremos será la precisión o el ancho, la que sea mayor
 	if (params->precision > params->with)
-		gap = params->precision + ft_sign_print(params);
+		gap = params->precision + ft_sign_print(params) -  numsize;
 	else
-		gap = params->with;
-	fill = malloc((gap - numsize + 1) * sizeof(char));
+		gap = params->with - numsize;
+	fill = malloc((gap + 1) * sizeof(char));
 	if (fill == NULL)
 		return (NULL);
 	// Incializamos la cadena con caracter vacio
-	ft_memset(fill, ' ', gap - numsize + 1);
+	ft_memset(fill, '.', gap);
+	//printf("\nFILL [%s] - GAP[%d]\n", fill, gap);
+	//printf("\nGAP [%d] - PUNTERO INCIO [%p]\n", gap, fill);
 	// Si la preecisión es mayoe que el tamaño del numero, tendremos que rellenar con ceros hata precisión
 	// Imprimir el signo (si es necesario) y rellenar con caracter vacio hasta el principio
 	if (params->precision > numsize)
 	{
 		// Si la precisión es mayor que el numero, rellenamos hacia atrás de 0 y ponemos signo
-		ptraux = fill + (gap - params->precision);
-		ft_memset(ptraux,'0',params->precision - numsize);
+		ptraux = ft_fill_reverse(fill + gap - 1, '0', params->precision - numsize);
+		//printf("\nRELLENO [%d] - PUNTERO PTRAUX [%p]\n", params->precision - numsize, ptraux);
+		//ptraux = fill + (gap - params->precision);
+		//ft_memset(ptraux,'0',params->precision - numsize);
 		if (ft_sign_print(params))
-			*(ptraux -1)= params->sign;
+			ptraux = ft_fill_reverse(ptraux, params->sign, 1);
+		//{
+		//	ptraux--;
+		//	*(ptraux)= params->sign;
+		//}
 		// Ahora rellenaremos hasta el final (principio) de caracter vacio
-		ft_memset(fill,' ', ptraux - fill);
+		
+		ptraux = ft_fill_reverse(ptraux, ' ', gap - params->precision);
+		//ft_memset(fill,' ', ptraux - fill);
 	}
-	// Si la precisión no super ale tamaño del numero, comprobamos si lo hace el ancho
-	else if (params->with > numsize)
+	// Ahora es momento de rellenar hasta alcanzar with
+	if (params->with > numsize)
 	{
-
+/*
+		if (params->fill == 0)
+			ft_memset(fill,'0',params->with - numsize);
+		else
+			ft_memset(fill,' ',params->with - numsize);
+		if (ft_sign_print(params))
+			*(fill - 1)= params->sign;
+*/
 	}
 	// Ponemos el caracter NULL y devolvemos
-	fill[gap - numsize] = '\0';  
+	fill[gap + 1] = '\0';  
+	//printf("\nFILL [%s]\n", fill);
+	//printf("\nFill[%s] - Precicision [%d] - With [%d]\n", fill, params->precision, params->with);
 	return (fill);
 }
 
