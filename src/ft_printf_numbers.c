@@ -42,15 +42,19 @@ int	ft_print_u(va_list	arg, t_params *params)
 {
 	char	*num;
 	char	*fill;
+	char	*toprint;
+	int		value;
 
 	num = ft_uitoa(va_arg(arg, unsigned int));
 	params->sign = '+';
 	fill = ft_fill_nbr(num, params);
-	num = ft_strjoin(fill, num);
-	ft_putstr_fd(num, 1);
+	toprint = ft_strjoin(fill, num);
 	free(num);
-	free (fill);
-	return (1);
+	free(fill);
+	ft_putstr_fd(toprint, 1);
+	value = ft_strlen(toprint);
+	free(toprint);
+	return (value);
 }
 
 int	ft_print_x(va_list arg)
@@ -58,7 +62,7 @@ int	ft_print_x(va_list arg)
 	char	*num;
 	int		len;
 
-	num = ft_itoa_hex(va_arg(arg, int));
+	num = ft_itoa_hex_4bytes(va_arg(arg, int));
 	ft_putstr_fd(num, 1);
 	len = ft_strlen(num);
 	free(num);
@@ -71,8 +75,7 @@ int	ft_print_xx(va_list arg)
 	int		i;
 	int		len;
 
-	num = ft_itoa_hex(va_arg(arg, int));
-	num = ft_substr(num,8,8);
+	num = ft_itoa_hex_4bytes(va_arg(arg, int));
 	i = 0;
 	while (*(num + i))
 	{

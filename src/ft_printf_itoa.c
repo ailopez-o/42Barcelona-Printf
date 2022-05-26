@@ -68,3 +68,26 @@ char	*ft_itoa_hex(unsigned long n)
 	}
 	return (chrnum);
 }
+
+
+char	*ft_itoa_hex_4bytes(unsigned int n)
+{
+	int				len;
+	char			*chrnum;
+	const char		hex[] = "0123456789abcdef";
+
+	if (n == 0)
+		return (ft_strdup("0"));
+	len = ft_num_digits(n,16);
+	chrnum = malloc(len * sizeof(char));
+	if (chrnum == NULL)
+		return (NULL);
+	chrnum[len - 1] = '\0';
+	while (n)
+	{
+		chrnum[len - 2] = hex[(n % 16)];
+		n = n / 16;
+		len--;
+	}
+	return (chrnum);
+}

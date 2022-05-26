@@ -41,6 +41,7 @@ char	*ft_uitoa(unsigned int n);
 int		ft_print_x(va_list arg);
 int		ft_print_xx(va_list arg);
 char	*ft_itoa_hex(unsigned long n);
+char	*ft_itoa_hex_4bytes(unsigned int n);
 int		ft_print_p(va_list arg);
 char	*ft_fill_nbr(char *num, t_params *params);
 #endif
