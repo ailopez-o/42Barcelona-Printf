@@ -16,7 +16,7 @@ int	ft_print_c(va_list	arg)
 	int	c;
 
 	c = va_arg(arg, int);
-	write(1, &c, 1);
+	write(1, &c, 1);	
 	return (1);
 }
 
@@ -25,7 +25,12 @@ int	ft_print_s(va_list arg, t_params *params)
 	char	*toprint;
 
 	toprint = va_arg(arg, char *);
-	if (params->precision > 0)
+	if (toprint == NULL)
+	{
+		write(1,"(null)", 6);
+		return (6);
+	}
+	else if (params->precision > 0)
 	{	
 		toprint = ft_substr(toprint, 0, params->precision);
 		ft_putstr_fd(toprint, 1);
@@ -33,5 +38,5 @@ int	ft_print_s(va_list arg, t_params *params)
 	}	
 	else
 		ft_putstr_fd(toprint, 1);
-	return (1);
+	return (ft_strlen(toprint));
 }

@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/25 19:39:26 by ailopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "inc/ft_printf.h"
+#include "../inc/ft_printf.h"
 
 char	*ft_fill_reverse(char *str, char c, int size)
 {
@@ -71,12 +71,13 @@ char	*ft_fill_nbr(char *num, t_params *params)
 		params->gap = 0;
 	if (params->gap && params->sign == '+')
 		params->sign = ' ';
-	fill = ft_strdup("");
 	if ((params->precision > (int)ft_strlen(num)) || \
 			params->with > (int)ft_strlen(num))
 		fill = ft_fill_str(ft_strlen(num), params);
 	else if (ft_is_sign(params))
 		fill = ft_substr(&params->sign, 0, 1);
+	else
+		fill = ft_strdup("");
 	return (fill);
 }
 /*

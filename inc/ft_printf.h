@@ -22,6 +22,7 @@ typedef	struct{
 	int 	precision;
 	char	type;
 	char	sign;
+	int		chrprinted;
 } t_params;
 
 # include "libft.h"

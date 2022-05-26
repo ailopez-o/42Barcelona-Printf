@@ -99,38 +99,41 @@ char	*ft_load_params(const char *str, t_params *params)
 	return ((char *)str);
 }
 
-char	*ft_print_arg(const char *str, va_list	arg)
+char	*ft_print_arg(const char *str, va_list	arg, t_params *params)
 {
-	t_params	params;
 	char		*returnvalue;
 
-	returnvalue = ft_load_params(str, &params);
-	if (params.type == 'c')
-		ft_print_c(arg);
-	if (params.type == 's')
-		ft_print_s(arg, &params);
-	if (params.type == 'p')
-		ft_print_p(arg);
-	if (params.type == 'd')
-		ft_print_d(arg, &params);
-	if (params.type == 'i')
-		ft_print_d(arg, &params);
-	if (params.type == 'u')
-		ft_print_u(arg, &params);
-	if (params.type == 'x')
-		ft_print_x(arg);
-	if (params.type == 'X')
-		ft_print_xx(arg);
-	if (params.type == '%')
+	returnvalue = ft_load_params(str, params);
+	if (params->type == 'c')
+		params->chrprinted = ft_print_c(arg);
+	if (params->type == 's')
+		params->chrprinted = ft_print_s(arg, params);
+	if (params->type == 'p')
+		params->chrprinted = ft_print_p(arg);
+	if (params->type == 'd')
+		params->chrprinted = ft_print_d(arg, params);
+	if (params->type == 'i')
+		params->chrprinted = ft_print_d(arg, params);
+	if (params->type == 'u')
+		params->chrprinted = ft_print_u(arg, params);
+	if (params->type == 'x')
+		params->chrprinted = ft_print_x(arg);
+	if (params->type == 'X')
+		params->chrprinted = ft_print_xx(arg);
+	if (params->type == '%')
+	{
 		write(1, "%", 1);
+		params->chrprinted = 1;
+	}
 	return (returnvalue);
 }
 
 int	ft_printf(const char *toprint, ...)
 {
-	int		n;
-	va_list	argc;
-	char	*str;
+	int			n;
+	va_list		argc;
+	char		*str;
+	t_params	params;
 
 	str = (char *)toprint;
 	va_start (argc, toprint);
@@ -138,11 +141,17 @@ int	ft_printf(const char *toprint, ...)
 	while (*str)
 	{
 		if (*str == '%')
-			str = ft_print_arg(str, argc);
+		{
+			str = ft_print_arg(str, argc, &params);
+			n = n + params.chrprinted;
+		}
 		else
+		{
 			write (1, str, 1);
+			n++;
+		}
 		str++;
 	}
 	va_end(argc);
-	return (1);
+	return (n);
 }
