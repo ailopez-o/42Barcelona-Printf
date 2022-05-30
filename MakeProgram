@@ -1,7 +1,7 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    MakeProgram                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ailopez- <ailopez-@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
@@ -21,7 +21,7 @@ OBJS		=	$(SRCS:%.c=%.o)
 
 CC		=	gcc
 
-CFLAGS	=	-g -Wall -Wextra -Werror
+CFLAGS	=	-g
 
 RM		=	rm -f
 

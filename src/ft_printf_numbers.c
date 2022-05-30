@@ -29,7 +29,7 @@ int	ft_print_d(va_list	arg, t_params *params)
 		params->sign = '-';
 	num = ft_uitoa((unsigned int)valueabs);
 	fill = ft_fill_nbr(num, params);
-	toprint = ft_strjoin(fill, num);
+	toprint = ft_strjoin(fill, num);		
 	free(num);
 	free(fill);
 	ft_putstr_fd(toprint, 1);

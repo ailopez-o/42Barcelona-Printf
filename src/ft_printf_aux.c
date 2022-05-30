@@ -46,7 +46,7 @@ char	*ft_fill_str(int numsize, t_params *params)
 		gap = params->with - numsize;
 	fill = malloc((gap + 1) * sizeof(char));
 	if (fill == NULL)
-		return (NULL);
+		return (NULL);	
 	if (params->precision > 0)
 	{
 		ft_memset(fill, ' ', gap);
@@ -59,7 +59,7 @@ char	*ft_fill_str(int numsize, t_params *params)
 		ft_memset(fill, params->fill, gap);
 		ft_sign_print(fill, params);
 	}
-	fill[gap + 1] = '\0';
+	fill[gap] = '\0';
 	return (fill);
 }
 
