@@ -11,11 +11,87 @@
 /* ************************************************************************** */
 #include "../inc/ft_printf.h"
 
+int ft_is_sign(t_params *params)
+{
+	return ((params->sign == '+' && params->positive) || \
+		params->sign == '-' || params->gap);
+}
+
+void ft_sign_print(t_params *params)
+{
+	if (ft_is_sign(params))
+	{
+		if (params->gap && params->sign == '+')
+			params->sign = ' ';
+		ft_putchar_fd(params->sign, 1);
+		params->chrprinted += 1;
+	}
+}
+
+int ft_print_fill(char c, int size)
+{
+	int num;
+	if (size < 0)
+		return (0);
+	num = size;
+	while(size)
+	{
+		ft_putchar_fd(c,1);
+		size--;
+	}
+	return (num);
+}
+
+void	ft_print_nbr(char *num, t_params *params)
+{
+	if (!(params->fill == '0' && params->with > (int)ft_strlen(num) && params->precision < (int)ft_strlen(num)))
+		ft_sign_print(params);
+	ft_print_fill('0',params->precision - ft_strlen(num));
+	ft_putstr_fd(num,1);
+	if (params->precision > (int)ft_strlen(num))
+		params->chrprinted += params->precision;
+	else
+		params->chrprinted += (int)ft_strlen(num);
+}
+
+void	ft_print_gap_pre(char *num, t_params *params)
+{
+	int gap;
+
+	if(!params->leftjustify)
+	{
+		if (params->with > (int)ft_strlen(num))
+		{
+			gap = params->with - (int)ft_strlen(num) - ft_is_sign(params);
+			if (params->precision > (int)ft_strlen(num))
+				gap = params->with - params->precision - ft_is_sign(params);
+			if(params->fill == '0')
+				ft_sign_print(params);
+			params->chrprinted += ft_print_fill(params->fill, gap);
+		}
+	}
+	else
+	{
+		if (params->fill == '0' && params->with > (int)ft_strlen(num) && params->precision < (int)ft_strlen(num))
+			ft_sign_print(params);
+	}
+}
+
+void	ft_print_gap_post(char *num, t_params *params)
+{
+	if(params->leftjustify && params->with > params->chrprinted)
+		params->chrprinted += ft_print_fill(' ', params->with - params->chrprinted);
+	else
+	{
+
+	}
+	num = num + 1;
+}
+
+
 int	ft_print_d(va_list	arg, t_params *params)
 {
 	char	*num;
-	char	*fill;
-	char	*toprint;
 	int		value;
 	long	valueabs;
 
@@ -28,81 +104,80 @@ int	ft_print_d(va_list	arg, t_params *params)
 	else
 		params->sign = '-';
 	num = ft_uitoa((unsigned int)valueabs);
-	fill = ft_fill_nbr(num, params);
-	toprint = ft_strjoin(fill, num);		
+	ft_print_gap_pre(num, params);
+	ft_print_nbr(num, params);
+	ft_print_gap_post(num, params);
 	free(num);
-	free(fill);
-	ft_putstr_fd(toprint, 1);
-	value = ft_strlen(toprint);
-	free(toprint);
-	return (value);
+	return (params->chrprinted);
 }
 
 int	ft_print_u(va_list	arg, t_params *params)
 {
 	char	*num;
-	char	*fill;
-	char	*toprint;
-	int		value;
 
 	num = ft_uitoa(va_arg(arg, unsigned int));
 	params->sign = '+';
-	fill = ft_fill_nbr(num, params);
-	toprint = ft_strjoin(fill, num);
+	ft_print_gap_pre(num, params);
+	ft_print_nbr(num, params);
+	ft_print_gap_post(num, params);
 	free(num);
-	free(fill);
-	ft_putstr_fd(toprint, 1);
-	value = ft_strlen(toprint);
-	free(toprint);
+	return (params->chrprinted);
+}
+
+int	ft_print_x(va_list arg, t_params *params)
+{
+	char	*num;
+	int		value;
+	int		valor;	
+
+	valor = va_arg(arg, int);
+	num = ft_itoa_hex_4bytes(valor);
+	if (params->altformat && valor != 0)
+		ft_putstr_fd("0x", 1);
+	ft_putstr_fd(num, 1);
+	value = (int)ft_strlen(num);
+	if (params->altformat && valor != 0)
+		value += 2;
+	free(num);
 	return (value);
 }
 
-int	ft_print_x(va_list arg)
+int	ft_print_xx(va_list arg, t_params *params)
 {
 	char	*num;
-	int		len;
+	int		value;
+	int 	i;
+	int		valor;
 
-	num = ft_itoa_hex_4bytes(va_arg(arg, int));
-	ft_putstr_fd(num, 1);
-	len = ft_strlen(num);
-	free(num);
-	return (len);
-}
-
-int	ft_print_xx(va_list arg)
-{
-	char	*num;
-	int		i;
-	int		len;
-
-	num = ft_itoa_hex_4bytes(va_arg(arg, int));
+	valor = va_arg(arg, int);
+	num = ft_itoa_hex_4bytes(valor);
 	i = 0;
 	while (*(num + i))
 	{
 		*(num + i) = ft_toupper(*(num + i));
 		i++;
 	}
+	if (params->altformat && valor != 0)
+		ft_putstr_fd("0X", 1);
 	ft_putstr_fd(num, 1);
-	len = ft_strlen(num);
+	value = (int)ft_strlen(num);
+	if (params->altformat && valor != 0)
+		value += 2;
 	free(num);
-	return (len);
+	return (value);
 }
 
 int	ft_print_p(va_list arg)
 {
 	char	*num;
-	char	*address;
 	char	*ptr;
 	int 	len;
 
 	ptr = va_arg(arg, char *);
 	num = ft_itoa_hex((unsigned long)ptr);
-	address = malloc((ft_strlen(num) + 3) * sizeof(char));
-	ft_strlcpy(address, "0x", 3);
-	ft_strlcat(address, num, ft_strlen(num) + 3);
-	ft_putstr_fd(address, 1);
-	len = ft_strlen(address);
-	free(address);
+	ft_putstr_fd("0x", 1);
+	ft_putstr_fd(num, 1);
+	len = (int)ft_strlen(num) + 2;
 	free(num);
 	return (len);
 }

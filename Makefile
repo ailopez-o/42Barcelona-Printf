@@ -18,7 +18,7 @@ LIBFT		= libft
 SRC_DIR		= src/
 OBJ_DIR		= obj/
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -I
+CFLAGS		= -g -Wall -Werror -Wextra -I
 RM			= rm -f
 AR			= ar rcs
 

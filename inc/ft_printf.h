@@ -38,10 +38,9 @@ int		ft_print_s(va_list arg, t_params *params);
 int		ft_print_d(va_list arg, t_params *params);
 int		ft_print_u(va_list  arg, t_params *params);
 char	*ft_uitoa(unsigned int n);
-int		ft_print_x(va_list arg);
-int		ft_print_xx(va_list arg);
+int		ft_print_x(va_list arg, t_params *params);
+int		ft_print_xx(va_list arg, t_params *params);
 char	*ft_itoa_hex(unsigned long n);
 char	*ft_itoa_hex_4bytes(unsigned int n);
 int		ft_print_p(va_list arg);
-char	*ft_fill_nbr(char *num, t_params *params);
 #endif
