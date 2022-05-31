@@ -48,7 +48,7 @@ void	ft_struct_ini(t_params *params)
 	params->leftjustify = 0;
 	params->gap = 0;
 	params->altformat = 0;
-	params->precision = 0;
+	params->precision = -1;
 	params->with = 0;
 	params->chrprinted = 0;
 }

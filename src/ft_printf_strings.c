@@ -60,7 +60,7 @@ int	ft_print_s(va_list arg, t_params *params)
 		write(1,"(null)", 6);
 		return (6);
 	}
-	if (params->precision > 0)
+	if (params->precision >= 0)
 		toprint = ft_substr(toprint, 0, params->precision);
 	else
 		toprint = ft_substr(toprint, 0, ft_strlen(toprint));

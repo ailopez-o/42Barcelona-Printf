@@ -113,29 +113,50 @@ int	ft_print_u(va_list	arg, t_params *params)
 int	ft_print_x(va_list arg, t_params *params)
 {
 	char	*num;
-	int		value;
 	int		valor;	
+	int 	len;		
 
 	valor = va_arg(arg, int);
+	if (valor == 0)
+	{
+		ft_putstr_fd("0", 1);
+		return(1);
+	}	
 	num = ft_itoa_hex_4bytes(valor);
-	if (params->altformat && valor != 0)
-		ft_putstr_fd("0x", 1);
-	ft_putstr_fd(num, 1);
-	value = (int)ft_strlen(num);
-	if (params->altformat && valor != 0)
-		value += 2;
+	if (params->leftjustify)
+	{
+		if(params->altformat)
+			ft_putstr_fd("0x", 1);
+		ft_putstr_fd(num, 1);
+		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat );	
+	}
+	else
+	{
+		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);		
+		if(params->altformat)
+			ft_putstr_fd("0x", 1);
+		ft_putstr_fd(num, 1);
+	}
+	len = (int)ft_strlen(num) + 2 * params->altformat;
 	free(num);
-	return (value);
+	if (params->with > len)
+		return (params->with);
+	return (len);
 }
 
 int	ft_print_xx(va_list arg, t_params *params)
 {
 	char	*num;
-	int		value;
 	int 	i;
 	int		valor;
+	int 	len;	
 
 	valor = va_arg(arg, int);
+	if (valor == 0)
+	{
+		ft_putstr_fd("0", 1);
+		return(1);
+	}
 	num = ft_itoa_hex_4bytes(valor);
 	i = 0;
 	while (*(num + i))
@@ -143,14 +164,25 @@ int	ft_print_xx(va_list arg, t_params *params)
 		*(num + i) = ft_toupper(*(num + i));
 		i++;
 	}
-	if (params->altformat && valor != 0)
-		ft_putstr_fd("0X", 1);
-	ft_putstr_fd(num, 1);
-	value = (int)ft_strlen(num);
-	if (params->altformat && valor != 0)
-		value += 2;
+	if (params->leftjustify)
+	{
+		if(params->altformat)
+			ft_putstr_fd("0X", 1);
+		ft_putstr_fd(num, 1);
+		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 *  params->altformat );	
+	}
+	else
+	{
+		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);		
+		if(params->altformat)
+			ft_putstr_fd("0X", 1);
+		ft_putstr_fd(num, 1);
+	}
+	len = (int)ft_strlen(num) + 2 * params->altformat;
 	free(num);
-	return (value);
+	if (params->with > len)
+		return (params->with);
+	return (len);
 }
 
 int	ft_print_p(va_list arg, t_params *params)
