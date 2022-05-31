@@ -108,11 +108,11 @@ char	*ft_print_arg(const char *str, va_list	arg, t_params *params)
 
 	returnvalue = ft_load_params(str, params);
 	if (params->type == 'c')
-		params->chrprinted = ft_print_c(arg);
+		params->chrprinted = ft_print_c(arg, params);
 	if (params->type == 's')
 		params->chrprinted = ft_print_s(arg, params);
 	if (params->type == 'p')
-		params->chrprinted = ft_print_p(arg);
+		params->chrprinted = ft_print_p(arg, params);
 	if (params->type == 'd')
 		params->chrprinted = ft_print_d(arg, params);
 	if (params->type == 'i')

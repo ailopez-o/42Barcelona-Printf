@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 #include "../inc/ft_printf.h"
 
+int ft_print_fill(char c, int size)
+{
+	int num;
+	if (size < 0)
+		return (0);
+	num = size;
+	while(size)
+	{
+		ft_putchar_fd(c,1);
+		size--;
+	}
+	return (num);
+}
 /*
 void	ft_print_params(t_params *params)
 {

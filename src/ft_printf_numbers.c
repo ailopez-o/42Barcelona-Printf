@@ -28,20 +28,6 @@ void ft_sign_print(t_params *params)
 	}
 }
 
-int ft_print_fill(char c, int size)
-{
-	int num;
-	if (size < 0)
-		return (0);
-	num = size;
-	while(size)
-	{
-		ft_putchar_fd(c,1);
-		size--;
-	}
-	return (num);
-}
-
 void	ft_print_nbr(char *num, t_params *params)
 {
 	if (!(params->fill == '0' && params->with > (int)ft_strlen(num) && params->precision < (int)ft_strlen(num)))
@@ -167,7 +153,7 @@ int	ft_print_xx(va_list arg, t_params *params)
 	return (value);
 }
 
-int	ft_print_p(va_list arg)
+int	ft_print_p(va_list arg, t_params *params)
 {
 	char	*num;
 	char	*ptr;
@@ -175,9 +161,21 @@ int	ft_print_p(va_list arg)
 
 	ptr = va_arg(arg, char *);
 	num = ft_itoa_hex((unsigned long)ptr);
-	ft_putstr_fd("0x", 1);
-	ft_putstr_fd(num, 1);
+	if (params->leftjustify)
+	{
+		ft_putstr_fd("0x", 1);
+		ft_putstr_fd(num, 1);
+		ft_print_fill(' ', params->with - ft_strlen(num) - 2);	
+	}
+	else
+	{
+		ft_print_fill(' ', params->with - ft_strlen(num) - 2);		
+		ft_putstr_fd("0x", 1);
+		ft_putstr_fd(num, 1);
+	}
 	len = (int)ft_strlen(num) + 2;
 	free(num);
+	if (params->with > len)
+		return (params->with);
 	return (len);
 }
