@@ -36,7 +36,7 @@ WHITE = \033[0;97m
 
 #Sources
 
-SRC_FILES	=	ft_printf_aux ft_printf_itoa ft_printf_numbers ft_printf ft_printf_strings
+SRC_FILES	=	ft_printf_aux ft_printf_itoa ft_printf_du ft_printf_sc ft_printf_xp ft_printf 
 
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
@@ -60,7 +60,7 @@ bonus:	$(OBJ)
 			cp libft/libft.a .
 			mv libft.a $(NAME)
 			$(AR) $(NAME) $(OBJ)
-			@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
+			@echo "$(GREEN)ft_printf bonus compiled!$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"

@@ -24,6 +24,13 @@ int ft_print_fill(char c, int size)
 	}
 	return (num);
 }
+
+int	ft_putstr(char *s)
+{
+	write(1, s, ft_strlen(s));
+	return (ft_strlen(s));
+}
+
 /*
 void	ft_print_params(t_params *params)
 {

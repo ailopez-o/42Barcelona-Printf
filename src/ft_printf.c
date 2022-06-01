@@ -48,7 +48,7 @@ void	ft_struct_ini(t_params *params)
 	params->leftjustify = 0;
 	params->gap = 0;
 	params->altformat = 0;
-	params->precision = 0;
+	params->precision = -1;
 	params->with = 0;
 	params->chrprinted = 0;
 }
@@ -92,7 +92,6 @@ char	*ft_load_params(const char *str, t_params *params)
 		with = malloc((i - wd + 1) * sizeof(char));
 		ft_strlcpy(with, str + wd, i - wd + 1);
 		params->precision = ft_atoi(with);
-		printf("WITH [%d]\n", params->precision);
 		free (with);
 	}
 	if(params->precision > 0)

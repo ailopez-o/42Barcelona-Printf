@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strings.c                                       :+:      :+:    :+:   */
+/*   ft_printf_sc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ailopez- <ailopez-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -51,19 +51,20 @@ void ft_print_str(char *str, int leftjustify, int size)
 
 int	ft_print_s(va_list arg, t_params *params)
 {
+	char	*param;
 	char	*toprint;
 	int 	len;
 
-	toprint = va_arg(arg, char *);
-	if (toprint == NULL)
-	{
-		write(1,"(null)", 6);
-		return (6);
-	}
-	if (params->precision > 0)
-		toprint = ft_substr(toprint, 0, params->precision);
+	param = va_arg(arg, char *);
+	if (param == NULL)
+		param = ft_strdup("(null)");
+	else	
+		param = ft_substr(param,0, ft_strlen(param));
+	if (params->precision >= 0)
+		toprint = ft_substr(param, 0, params->precision);
 	else
-		toprint = ft_substr(toprint, 0, ft_strlen(toprint));
+		toprint = ft_substr(param, 0, ft_strlen(param));
+	free(param);
 	len = ft_strlen(toprint);
 	if (params->with > len)
 		ft_print_str (toprint, params->leftjustify, params->with - len);

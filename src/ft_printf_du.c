@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_numbrs.c                                        :+:      :+:    :+:   */
+/*   ft_printf_du.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ailopez- <ailopez-@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -63,15 +63,10 @@ void	ft_print_gap_pre(char *num, t_params *params)
 	}
 }
 
-void	ft_print_gap_post(char *num, t_params *params)
+void	ft_print_gap_post(t_params *params)
 {
 	if(params->leftjustify && params->with > params->chrprinted)
 		params->chrprinted += ft_print_fill(' ', params->with - params->chrprinted);
-	else
-	{
-
-	}
-	num = num + 1;
 }
 
 
@@ -92,7 +87,7 @@ int	ft_print_d(va_list	arg, t_params *params)
 	num = ft_uitoa((unsigned int)valueabs);
 	ft_print_gap_pre(num, params);
 	ft_print_nbr(num, params);
-	ft_print_gap_post(num, params);
+	ft_print_gap_post(params);
 	free(num);
 	return (params->chrprinted);
 }
@@ -105,101 +100,7 @@ int	ft_print_u(va_list	arg, t_params *params)
 	params->sign = '+';
 	ft_print_gap_pre(num, params);
 	ft_print_nbr(num, params);
-	ft_print_gap_post(num, params);
+	ft_print_gap_post(params);
 	free(num);
 	return (params->chrprinted);
-}
-
-int	ft_print_x(va_list arg, t_params *params)
-{
-	char	*num;
-	int		value;
-	int		valor;	
-
-	valor = va_arg(arg, int);
-	num = ft_itoa_hex_4bytes(valor);
-	if (params->leftjustify)
-	{
-		if (params->altformat)
-			ft_putstr_fd("0x", 1);
-		ft_putstr_fd(num, 1);
-		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);	
-	}
-	else
-	{
-		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);		
-		if (params->altformat)	
-			ft_putstr_fd("0x", 1);
-		ft_putstr_fd(num, 1);
-	}
-
-	value = (int)ft_strlen(num) + 2 * params->altformat;
-	free(num);
-	if (params->with > value)
-		value = params->with;
-	return (value);
-}
-
-int	ft_print_xx(va_list arg, t_params *params)
-{
-	char	*num;
-	int		value;
-	int 	i;
-	int		valor;
-
-	valor = va_arg(arg, int);
-	num = ft_itoa_hex_4bytes(valor);
-	i = 0;
-	while (*(num + i))
-	{
-		*(num + i) = ft_toupper(*(num + i));
-		i++;
-	}
-	if (params->leftjustify)
-	{
-		if (params->altformat)
-			ft_putstr_fd("0X", 1);
-		ft_putstr_fd(num, 1);
-		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);	
-	}
-	else
-	{
-		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);		
-		if (params->altformat)	
-			ft_putstr_fd("0X", 1);
-		ft_putstr_fd(num, 1);
-	}
-
-	value = (int)ft_strlen(num) + 2 * params->altformat;
-	free(num);
-	if (params->with > value)
-		value = params->with;
-	return (value);
-}
-
-int	ft_print_p(va_list arg, t_params *params)
-{
-	char	*num;
-	char	*ptr;
-	int 	len;
-
-	ptr = va_arg(arg, char *);
-	num = ft_itoa_hex((unsigned long)ptr);
-	if (params->leftjustify)
-	{
-		ft_putstr_fd("0x", 1);
-		ft_putstr_fd(num, 1);
-		ft_print_fill(' ', params->with - ft_strlen(num) - 2);	
-	}
-	else
-	{
-		ft_print_fill(' ', params->with - ft_strlen(num) - 2);		
-		ft_putstr_fd("0x", 1);
-		ft_putstr_fd(num, 1);
-	}
-	len = (int)ft_strlen(num) + 2;
-	free(num);
-	if (params->with > len)
-		return (params->with);
-	return (len);
 }

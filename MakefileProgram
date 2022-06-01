@@ -12,7 +12,7 @@
 # **************************************************************************** #
 NAME	= 	a.out
 
-SRCS		=	main.c src/ft_printf.c src/ft_printf_numbers.c src/ft_printf_strings.c src/ft_printf_aux.c src/ft_printf_itoa.c
+SRCS		=	main.c src/ft_printf_aux.c src/ft_printf_itoa.c src/ft_printf_du.c src/ft_printf_sc.c src/ft_printf_xp.c src/ft_printf.c
 
 
 LIBFT		= 	libft
