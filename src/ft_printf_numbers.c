@@ -118,13 +118,25 @@ int	ft_print_x(va_list arg, t_params *params)
 
 	valor = va_arg(arg, int);
 	num = ft_itoa_hex_4bytes(valor);
-	if (params->altformat && valor != 0)
-		ft_putstr_fd("0x", 1);
-	ft_putstr_fd(num, 1);
-	value = (int)ft_strlen(num);
-	if (params->altformat && valor != 0)
-		value += 2;
+	if (params->leftjustify)
+	{
+		if (params->altformat)
+			ft_putstr_fd("0x", 1);
+		ft_putstr_fd(num, 1);
+		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);	
+	}
+	else
+	{
+		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);		
+		if (params->altformat)	
+			ft_putstr_fd("0x", 1);
+		ft_putstr_fd(num, 1);
+	}
+
+	value = (int)ft_strlen(num) + 2 * params->altformat;
 	free(num);
+	if (params->with > value)
+		value = params->with;
 	return (value);
 }
 
@@ -143,13 +155,25 @@ int	ft_print_xx(va_list arg, t_params *params)
 		*(num + i) = ft_toupper(*(num + i));
 		i++;
 	}
-	if (params->altformat && valor != 0)
-		ft_putstr_fd("0X", 1);
-	ft_putstr_fd(num, 1);
-	value = (int)ft_strlen(num);
-	if (params->altformat && valor != 0)
-		value += 2;
+	if (params->leftjustify)
+	{
+		if (params->altformat)
+			ft_putstr_fd("0X", 1);
+		ft_putstr_fd(num, 1);
+		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);	
+	}
+	else
+	{
+		ft_print_fill(params->fill, params->with - ft_strlen(num) - 2 * params->altformat);		
+		if (params->altformat)	
+			ft_putstr_fd("0X", 1);
+		ft_putstr_fd(num, 1);
+	}
+
+	value = (int)ft_strlen(num) + 2 * params->altformat;
 	free(num);
+	if (params->with > value)
+		value = params->with;
 	return (value);
 }
 
