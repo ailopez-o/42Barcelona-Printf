@@ -18,7 +18,7 @@ LIBFT		= libft
 SRC_DIR		= src/
 OBJ_DIR		= obj/
 CC			= gcc
-CFLAGS		= -g -Wall -Werror -Wextra -I
+CFLAGS		= -g -Wall -Werror -Wextra -MMD -I
 RM			= rm -f
 AR			= ar rcs
 
@@ -41,15 +41,21 @@ SRC_FILES	=	ft_printf_aux ft_printf_itoa ft_printf_du ft_printf_sc ft_printf_xp 
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+DEPS 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 
 ###
 
 OBJF		=	.cache_exists
 
-all:		$(NAME)
+all:	makelibs
+	$(MAKE)	$(NAME)
 
+makelibs:	
+			$(MAKE) -C $(LIBFT)
+			
+-include 	${DEPS}
 $(NAME):	$(OBJ)
-			make -C $(LIBFT)
+			@echo ${DEPS}
 			cp libft/libft.a .
 			mv libft.a $(NAME)
 			$(AR) $(NAME) $(OBJ)
@@ -80,7 +86,8 @@ fclean:		clean
 			@echo "$(CYAN)ft_printf executable files cleaned!$(DEF_COLOR)"
 			@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
 
-re:			fclean all
+re:			fclean 
+			$(MAKE)	
 			@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
 
 norm:

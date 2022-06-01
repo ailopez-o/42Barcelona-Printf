@@ -30,6 +30,15 @@ void ft_sign_print(t_params *params)
 
 void	ft_print_nbr(char *num, t_params *params)
 {
+	if (params->precision == 0 && ft_atoi(num) == 0 )
+	{
+		if(params->with > 0)
+			ft_putstr_fd(" ", 1);
+		else
+			ft_putstr_fd("", 1);
+		params->chrprinted = 1;
+		return;
+	}
 	if (!(params->fill == '0' && params->with > (int)ft_strlen(num) && params->precision < (int)ft_strlen(num)))
 		ft_sign_print(params);
 	ft_print_fill('0',params->precision - ft_strlen(num));
