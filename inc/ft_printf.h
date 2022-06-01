@@ -43,5 +43,6 @@ int		ft_print_xx(va_list arg, t_params *params);
 char	*ft_itoa_hex(unsigned long n);
 char	*ft_itoa_hex_4bytes(unsigned int n);
 int		ft_print_p(va_list arg, t_params *params);
-int ft_print_fill(char c, int size);
+int 	ft_print_fill(char c, int size);
+int		ft_putstr(char *s);
 #endif
