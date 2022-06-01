@@ -99,6 +99,9 @@ char	*ft_load_params(const char *str, t_params *params)
 	while (!ft_islimit(*(str)))
 		str++;
 	params->type = *(str);
+	//printf("STR[%c] - STR-1[%c]\n", *str, *(str-1));
+	if (*str == '%' && *(str - 1) != '%' && params->with > 0)
+		params->type = 'r';
 	return ((char *)str);
 }
 
@@ -126,6 +129,20 @@ char	*ft_print_arg(const char *str, va_list	arg, t_params *params)
 	if (params->type == '%')
 	{
 		write(1, "%", 1);
+		params->chrprinted = 1;
+	}
+	if (params->type == 'r')
+	{
+		if (params->leftjustify)
+		{
+			write(1, "%", 1);
+			params->chrprinted = ft_print_fill(' ', params->with - 1);
+		}
+		else	
+		{
+			params->chrprinted = ft_print_fill(' ', params->with - 1);
+			write(1, "%", 1);
+		}
 		params->chrprinted = 1;
 	}
 	return (returnvalue);

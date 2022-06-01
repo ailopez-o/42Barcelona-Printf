@@ -83,17 +83,6 @@ int	ft_print_xx(va_list arg, t_params *params)
 
 	valor = va_arg(arg, int);
 	num = ft_itoa_hex_4bytes(valor);
-
-	if (params->precision == 0 && ft_atoi(num) == 0 )
-	{
-		if(params->with > 0)
-			ft_putstr_fd(" ", 1);
-		else
-			ft_putstr_fd("", 1);
-		params->chrprinted = 1;
-		return (1);
-	}
-
 	i = 0;
 	while (*(num + i))
 	{
@@ -102,7 +91,7 @@ int	ft_print_xx(va_list arg, t_params *params)
 	}	
 	if (valor == 0)
 		params->altformat = 0;
-	if (params->precision >= 0 && params->precision < (int)ft_strlen(num))
+	if (params->precision >= 0 && params->precision < (int)ft_strlen(num) && valor != 0)
 		params->precision = (int)ft_strlen(num);
 	len = 0;
 	if (params->leftjustify)
@@ -113,7 +102,7 @@ int	ft_print_xx(va_list arg, t_params *params)
 		if(params->altformat)
 			len += ft_putstr("0X");
 		len += ft_print_fill('0', gap);
-		len += ft_putstr(num);
+		len += ft_print_nbr_x(num, params);
 		len += ft_print_fill(' ', params->with - len);
 	}
 	else

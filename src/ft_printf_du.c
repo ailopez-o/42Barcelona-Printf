@@ -62,6 +62,8 @@ void	ft_print_gap_pre(char *num, t_params *params)
 				gap = params->with - params->precision - ft_is_sign(params);
 			if(params->fill == '0')
 				ft_sign_print(params);
+			if (params->precision >= 0)
+				params->fill = ' ';
 			params->chrprinted += ft_print_fill(params->fill, gap);
 		}
 	}
@@ -94,6 +96,8 @@ int	ft_print_d(va_list	arg, t_params *params)
 	else
 		params->sign = '-';
 	num = ft_uitoa((unsigned int)valueabs);
+	//printf("with [%d]\n", params->with);
+	//printf("precision [%d]\n", params->precision);	
 	ft_print_gap_pre(num, params);
 	ft_print_nbr(num, params);
 	ft_print_gap_post(params);
