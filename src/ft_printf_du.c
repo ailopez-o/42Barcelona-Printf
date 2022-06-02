@@ -33,10 +33,25 @@ void	ft_print_nbr(char *num, t_params *params)
 	if (params->precision == 0 && ft_atoi(num) == 0 )
 	{
 		if(params->with > 0)
-			ft_putstr_fd(" ", 1);
+		{
+			if(params->with > 1 && ft_is_sign(params) && params->leftjustify == 0)
+			{
+				ft_putstr_fd(" ", 1);
+				params->chrprinted += 1;
+			}
+			if (ft_is_sign(params))
+				ft_sign_print(params);
+			else
+			{
+				ft_putstr_fd(" ", 1);
+				params->chrprinted += 1;
+			}
+		}
 		else
+		{
+			ft_sign_print(params);
 			ft_putstr_fd("", 1);
-		params->chrprinted = 1;
+		}
 		return;
 	}
 	if (!(params->fill == '0' && params->with > (int)ft_strlen(num) && params->precision < (int)ft_strlen(num)))
@@ -60,7 +75,7 @@ void	ft_print_gap_pre(char *num, t_params *params)
 			gap = params->with - (int)ft_strlen(num) - ft_is_sign(params);
 			if (params->precision > (int)ft_strlen(num))
 				gap = params->with - params->precision - ft_is_sign(params);
-			if(params->fill == '0' && params->precision < 0)
+			if((params->fill == '0' && params->precision < 0))
 				ft_sign_print(params);
 			if (params->precision >= 0)
 				params->fill = ' ';
