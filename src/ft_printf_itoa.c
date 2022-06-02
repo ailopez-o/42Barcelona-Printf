@@ -25,7 +25,6 @@ int	ft_num_digits(unsigned long valor, int base)
 	return (len);
 }
 
-
 char	*ft_uitoa(unsigned int n)
 {
 	int		len;
@@ -33,7 +32,7 @@ char	*ft_uitoa(unsigned int n)
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	len = ft_num_digits(n,10);
+	len = ft_num_digits(n, 10);
 	chrnum = malloc(len * sizeof(char));
 	if (chrnum == NULL)
 		return (NULL);
@@ -55,7 +54,7 @@ char	*ft_itoa_hex(unsigned long n)
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	len = ft_num_digits(n,16);
+	len = ft_num_digits(n, 16);
 	chrnum = malloc(len * sizeof(char));
 	if (chrnum == NULL)
 		return (NULL);
@@ -69,7 +68,6 @@ char	*ft_itoa_hex(unsigned long n)
 	return (chrnum);
 }
 
-
 char	*ft_itoa_hex_4bytes(unsigned int n)
 {
 	int				len;
@@ -78,7 +76,7 @@ char	*ft_itoa_hex_4bytes(unsigned int n)
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	len = ft_num_digits(n,16);
+	len = ft_num_digits(n, 16);
 	chrnum = malloc(len * sizeof(char));
 	if (chrnum == NULL)
 		return (NULL);

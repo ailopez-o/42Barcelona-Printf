@@ -12,19 +12,6 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-typedef	struct{
-	int 	with;
-	char	fill;
-	int		positive;
-	int		leftjustify;
-	int		gap;
-	int		altformat;
-	int 	precision;
-	char	type;
-	char	sign;
-	int		chrprinted;
-} t_params;
-
 # include "libft.h"
 # include <stdarg.h>
 # include <string.h>
@@ -33,17 +20,32 @@ typedef	struct{
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef struct p_params{
+	int		with;
+	char	fill;
+	int		positive;
+	int		leftjustify;
+	int		gap;
+	int		altformat;
+	int		precision;
+	char	type;
+	char	sign;
+	int		chrprinted;
+}	t_params;
+
 int		ft_printf(const char *params, ...);
-int		ft_print_c(va_list	arg, t_params *params);
+int		ft_print_c(va_list arg, t_params *params);
 int		ft_print_s(va_list arg, t_params *params);
 int		ft_print_d(va_list arg, t_params *params);
-int		ft_print_u(va_list  arg, t_params *params);
+int		ft_print_u(va_list arg, t_params *params);
 char	*ft_uitoa(unsigned int n);
 int		ft_print_x(va_list arg, t_params *params);
 int		ft_print_xx(va_list arg, t_params *params);
 char	*ft_itoa_hex(unsigned long n);
 char	*ft_itoa_hex_4bytes(unsigned int n);
 int		ft_print_p(va_list arg, t_params *params);
-int 	ft_print_fill(char c, int size);
+int		ft_print_fill(char c, int size);
 int		ft_putstr(char *s);
+int		ft_is_sign(t_params *params);
+int		ft_sign_print(t_params *params);
 #endif

@@ -18,26 +18,26 @@ int	ft_print_c(va_list	arg, t_params *params)
 	c = va_arg(arg, int);
 	if (params->with < 2)
 	{
-		write(1, &c, 1);	
+		write(1, &c, 1);
 		return (1);
 	}
 	if (params->leftjustify)
 	{	
-		write(1, &c, 1);	
-		ft_print_fill(' ',params->with - 1);
+		write(1, &c, 1);
+		ft_print_fill(' ', params->with - 1);
 		return (params->with);
 	}
 	else
 	{
-		ft_print_fill(' ',params->with - 1);
+		ft_print_fill(' ', params->with - 1);
 		write(1, &c, 1);
-		return (params->with);	
+		return (params->with);
 	}	
 }
 
-void ft_print_str(char *str, int leftjustify, int size)
+void	ft_print_str(char *str, int leftjustify, int size)
 {
-	if(leftjustify)
+	if (leftjustify)
 	{
 		ft_putstr_fd(str, 1);
 		ft_print_fill(' ', size);
@@ -53,13 +53,13 @@ int	ft_print_s(va_list arg, t_params *params)
 {
 	char	*param;
 	char	*toprint;
-	int 	len;
+	int		len;
 
 	param = va_arg(arg, char *);
 	if (param == NULL)
 		param = ft_strdup("(null)");
-	else	
-		param = ft_substr(param,0, ft_strlen(param));
+	else
+		param = ft_substr(param, 0, ft_strlen(param));
 	if (params->precision >= 0)
 		toprint = ft_substr(param, 0, params->precision);
 	else
@@ -70,9 +70,9 @@ int	ft_print_s(va_list arg, t_params *params)
 		ft_print_str (toprint, params->leftjustify, params->with - len);
 	else
 		ft_putstr_fd(toprint, 1);
-	free (toprint);		
+	free (toprint);
 	if (params->with > len)
 		return (params->with);
 	else
-		return(len);
+		return (len);
 }

@@ -94,12 +94,11 @@ char	*ft_load_params(const char *str, t_params *params)
 		params->precision = ft_atoi(with);
 		free (with);
 	}
-	if(params->precision > 0)
+	if (params->precision > 0)
 		params->fill = ' ';
 	while (!ft_islimit(*(str)))
 		str++;
 	params->type = *(str);
-	//printf("STR[%c] - STR-1[%c]\n", *str, *(str-1));
 	if (*str == '%' && *(str - 1) != '%' && params->with > 0)
 		params->type = 'r';
 	return ((char *)str);
@@ -138,7 +137,7 @@ char	*ft_print_arg(const char *str, va_list	arg, t_params *params)
 			write(1, "%", 1);
 			params->chrprinted = ft_print_fill(' ', params->with - 1);
 		}
-		else	
+		else
 		{
 			params->chrprinted = ft_print_fill(' ', params->with - 1);
 			write(1, "%", 1);

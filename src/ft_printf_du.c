@@ -11,53 +11,29 @@
 /* ************************************************************************** */
 #include "../inc/ft_printf.h"
 
-int ft_is_sign(t_params *params)
-{
-	return ((params->sign == '+' && params->positive) || \
-		params->sign == '-' || params->gap);
-}
-
-void ft_sign_print(t_params *params)
-{
-	if (ft_is_sign(params))
-	{
-		if (params->gap && params->sign == '+')
-			params->sign = ' ';
-		ft_putchar_fd(params->sign, 1);
-		params->chrprinted += 1;
-	}
-}
-
 void	ft_print_nbr(char *num, t_params *params)
 {
-	if (params->precision == 0 && ft_atoi(num) == 0 )
+	if (params->precision == 0 && ft_atoi(num) == 0)
 	{
-		if(params->with > 0)
+		if (params->with > 0)
 		{
-			if(params->with > 1 && ft_is_sign(params) && params->leftjustify == 0)
-			{
-				ft_putstr_fd(" ", 1);
-				params->chrprinted += 1;
-			}
+			if (params->with > 1 && ft_is_sign(params) && \
+				params->leftjustify == 0)
+				params->chrprinted += ft_print_fill(' ', 1);
 			if (ft_is_sign(params))
-				ft_sign_print(params);
+				params->chrprinted += ft_sign_print(params);
 			else
-			{
-				ft_putstr_fd(" ", 1);
-				params->chrprinted += 1;
-			}
+				params->chrprinted += ft_print_fill(' ', 1);
 		}
 		else
-		{
-			ft_sign_print(params);
-			ft_putstr_fd("", 1);
-		}
-		return;
+			params->chrprinted += ft_sign_print(params);
+		return ;
 	}
-	if (!(params->fill == '0' && params->with > (int)ft_strlen(num) && params->precision < (int)ft_strlen(num)))
-		ft_sign_print(params);
-	ft_print_fill('0',params->precision - ft_strlen(num));
-	ft_putstr_fd(num,1);
+	if (!(params->fill == '0' && params->with > (int)ft_strlen(num) && \
+		params->precision < (int)ft_strlen(num)))
+		params->chrprinted += ft_sign_print(params);
+	ft_print_fill('0', params->precision - ft_strlen(num));
+	ft_putstr_fd(num, 1);
 	if (params->precision > (int)ft_strlen(num))
 		params->chrprinted += params->precision;
 	else
@@ -66,17 +42,17 @@ void	ft_print_nbr(char *num, t_params *params)
 
 void	ft_print_gap_pre(char *num, t_params *params)
 {
-	int gap;
+	int	gap;
 
-	if(!params->leftjustify)
+	if (!params->leftjustify)
 	{
 		if (params->with > (int)ft_strlen(num))
 		{
 			gap = params->with - (int)ft_strlen(num) - ft_is_sign(params);
 			if (params->precision > (int)ft_strlen(num))
 				gap = params->with - params->precision - ft_is_sign(params);
-			if((params->fill == '0' && params->precision < 0))
-				ft_sign_print(params);
+			if ((params->fill == '0' && params->precision < 0))
+				params->chrprinted += ft_sign_print(params);
 			if (params->precision >= 0)
 				params->fill = ' ';
 			params->chrprinted += ft_print_fill(params->fill, gap);
@@ -84,17 +60,18 @@ void	ft_print_gap_pre(char *num, t_params *params)
 	}
 	else
 	{
-		if (params->fill == '0' && params->with > (int)ft_strlen(num) && params->precision < (int)ft_strlen(num))
-			ft_sign_print(params);
+		if (params->fill == '0' && params->with > (int)ft_strlen(num) && \
+			params->precision < (int)ft_strlen(num))
+			params->chrprinted += ft_sign_print(params);
 	}
 }
 
 void	ft_print_gap_post(t_params *params)
 {
-	if(params->leftjustify && params->with > params->chrprinted)
-		params->chrprinted += ft_print_fill(' ', params->with - params->chrprinted);
+	if (params->leftjustify && params->with > params->chrprinted)
+		params->chrprinted += \
+		ft_print_fill(' ', params->with - params->chrprinted);
 }
-
 
 int	ft_print_d(va_list	arg, t_params *params)
 {
@@ -111,8 +88,6 @@ int	ft_print_d(va_list	arg, t_params *params)
 	else
 		params->sign = '-';
 	num = ft_uitoa((unsigned int)valueabs);
-	//printf("with [%d]\n", params->with);
-	//printf("precision [%d]\n", params->precision);	
 	ft_print_gap_pre(num, params);
 	ft_print_nbr(num, params);
 	ft_print_gap_post(params);
