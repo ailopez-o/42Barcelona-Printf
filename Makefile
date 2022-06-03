@@ -61,15 +61,9 @@ $(NAME):	$(OBJ) ${LIBFT}/libft.a $(INCLUDE)/ft_printf.h
 			@echo "$(MAGENTA)$(AR) $(NAME) $(OBJ)$(DEF_COLOR)"
 			@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
 
-bonus:		$(OBJ_B) ${LIBFT}/libft.a
-			@make -C $(LIBFT)
-			cp libft/libft.a .
-			mv libft.a $(NAME)
-			@$(AR) $(NAME) $(OBJ_B)
-			@echo "$(YELLOW)$(AR) $(NAME) $(OBJ_B)$(DEF_COLOR)"			
-			@echo "$(GREEN)ft_printf bonus compiled!$(DEF_COLOR)"
-			@touch $@
-
+bonus:		
+			@$(MAKE) all
+			
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
