@@ -9,8 +9,8 @@
 /*   Updated: 2022/05/24 00:19:08 by aitorlope        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
 # include "libft.h"
 # include <stdarg.h>
