@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    MakeProgram                                        :+:      :+:    :+:    #
+#    MakefileProgram                                    :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ailopez- <ailopez-@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/09 16:48:38 by ailopez-          #+#    #+#              #
-#    Updated: 2022/05/25 12:01:57 by ailopez-         ###   ########.fr        #
+#    Updated: 2022/06/03 11:31:48 by aitoraudi        ###   ########.fr        #
 #    Updated: 2022/05/24 00:35:24 by aitorlope        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -21,7 +21,7 @@ OBJS		=	$(SRCS:%.c=%.o)
 
 CC		=	gcc
 
-CFLAGS	=	-g
+CFLAGS	=	-fsanitize=undefined
 
 RM		=	rm -f
 
