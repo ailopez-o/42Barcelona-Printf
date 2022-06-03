@@ -37,13 +37,10 @@ WHITE = \033[0;97m
 #Sources
 
 SRC_FILES	=	ft_printf_aux ft_printf_itoa ft_printf_du ft_printf_sc ft_printf_xp ft_printf 
-SRC_FILES_B	=	ft_printf_aux_bonus ft_printf_itoa_bonus ft_printf_du_bonus ft_printf_sc_bonus \
-				ft_printf_xp_bonus ft_printf_bonus 
+
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-SRC_B 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES_B)))
-OBJ_B		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES_B)))
 DEPS 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 
 ###
@@ -57,7 +54,7 @@ makelibs:
 			@$(MAKE) -C $(LIBFT)
 			
 -include 	${DEPS}
-$(NAME):	$(OBJ) ${LIBFT}/libft.a
+$(NAME):	$(OBJ) ${LIBFT}/libft.a $(INCLUDE)/ft_printf.h
 			cp libft/libft.a .
 			mv libft.a $(NAME)
 			@$(AR) $(NAME) $(OBJ)
