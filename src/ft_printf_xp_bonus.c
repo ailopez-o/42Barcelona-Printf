@@ -56,7 +56,7 @@ int	ft_print_xx(va_list arg, t_params *params)
 	if (params->leftjustify)
 		len = ft_print_x_left(params, num, "0X");
 	else
-		len = ft_print_x_right(params, num, "0x");
+		len = ft_print_x_right(params, num, "0X");
 	free(num);
 	return (len);
 }
