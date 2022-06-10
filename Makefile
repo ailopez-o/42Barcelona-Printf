@@ -36,7 +36,7 @@ WHITE = \033[0;97m
 
 #Sources
 
-SRC_FILES	=	ft_printf_aux ft_printf_itoa ft_printf_du ft_printf_sc ft_printf_xp ft_printf 
+SRC_FILES	=	ft_printf_aux ft_printf_aux2 ft_printf_itoa ft_printf_du ft_printf_sc ft_printf_xp ft_printf_xp2 ft_printf 
 
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

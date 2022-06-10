@@ -48,4 +48,11 @@ int		ft_print_fill(char c, int size);
 int		ft_putstr(char *s);
 int		ft_is_sign(t_params *params);
 int		ft_sign_print(t_params *params);
+int		ft_print_x_right(t_params *params, char *num, char *prefix);
+int		ft_print_x_left(t_params *params, char *num, char *prefix);
+int		ft_print_nbr_x(char *num, t_params *params);
+int		ft_islimit(char c);
+int		ft_isflags(char c);
+void	ft_struct_ini(t_params *params);
+void	ft_fill_flags(char c, t_params *params);
 #endif
