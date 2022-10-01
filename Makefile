@@ -12,7 +12,7 @@
 # **************************************************************************** #
 #Variables
 
-NAME		= libftprintf.a
+NAME		= mylib.a
 INCLUDE		= inc
 LIBFT		= libft
 SRC_DIR		= src/
