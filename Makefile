@@ -54,7 +54,7 @@ OBJF		=	.cache_exists
 
 all:	
 	@Make makelibs
-	@echo "\n🚧 $(BOLD_YELLOW)Starting $(NAME) compilation..\n$(DEF_COLOR)"	
+	@echo "\n🎯 $(YELLOW)Starting $(WHITE)[$(NAME)]$(YELLOW) compilation..\n$(DEF_COLOR)"	
 	@Make $(NAME)
 	@echo "\n🔰 $(GREEN)Printf done!\n$(DEF_COLOR)"
 
@@ -65,9 +65,9 @@ makelibs:
 $(NAME):	$(OBJ) ${LIBFT}/libft.a $(INCLUDE)/ft_printf.h
 			@cp libft/libft.a .
 			@mv libft.a $(NAME)
-			@echo "\n🚧 $(BOLD_YELLOW)Linking $(NAME) lib...$(DEF_COLOR)"	
+			@echo "\n  🚧 $(YELLOW)Linking $(NAME) lib...$(DEF_COLOR)"	
 			@$(AR) $(NAME) $(OBJ)
-			@echo "$(CYAN)$(AR) $(NAME) $(OBJ)$(DEF_COLOR)"
+			@echo "$(CYAN)  $(AR) $(NAME) $(OBJ)$(DEF_COLOR)"
 
 bonus:		
 			@$(MAKE) all
