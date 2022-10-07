@@ -59,7 +59,7 @@ all:
 	@echo "\n🔰 $(GREEN)$(NAME) done!\n$(DEF_COLOR)"
 
 makelibs:	
-			@$(MAKE) -C $(LIBFT)
+			@$(MAKE) -s -C $(LIBFT)
 			
 -include 	${DEPS}
 $(NAME):	$(OBJ) ${LIBFT}/libft.a $(INCLUDE)/ft_printf.h
