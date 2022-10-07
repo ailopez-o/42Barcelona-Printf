@@ -54,9 +54,9 @@ OBJF		=	.cache_exists
 
 all:	
 	@Make makelibs
-	@echo "\n🎯 $(YELLOW)Starting $(WHITE)[$(NAME)]$(YELLOW) compilation..\n$(DEF_COLOR)"	
+	@echo "\n🎯 $(YELLOW)Starting $(WHITE)[$(NAME)]$(YELLOW) compilation..$(DEF_COLOR)"	
 	@Make $(NAME)
-	@echo "\n🔰 $(GREEN)Printf done!\n$(DEF_COLOR)"
+	@echo "\n🔰 $(GREEN)$(NAME) done!\n$(DEF_COLOR)"
 
 makelibs:	
 			@$(MAKE) -C $(LIBFT)
@@ -65,16 +65,16 @@ makelibs:
 $(NAME):	$(OBJ) ${LIBFT}/libft.a $(INCLUDE)/ft_printf.h
 			@cp libft/libft.a .
 			@mv libft.a $(NAME)
-			@echo "\n  🚧 $(YELLOW)Linking $(NAME) lib...$(DEF_COLOR)"	
 			@$(AR) $(NAME) $(OBJ)
-			@echo "$(CYAN)  $(AR) $(NAME) $(OBJ)$(DEF_COLOR)"
+			@echo "\n🔗$(CYAN) $(AR) $(NAME) $(OBJ)$(DEF_COLOR)"
 
 bonus:		
 			@$(MAKE) all
 			
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 			@${CC} ${CFLAGS} -I./ -c $< -o $@
-			@echo " 🔧 $(GRAY)${CC} ${CFLAGS} -I./ -c $< -o $@$(DEF_COLOR)"
+			@printf "\r                                                                                                "
+			@printf "\r🔧 $(GRAY)${CC} ${CFLAGS} -I./ -c $< -o $@$(DEF_COLOR)"
 
 $(OBJF):
 			@mkdir -p $(OBJ_DIR)
@@ -82,12 +82,12 @@ $(OBJF):
 clean:
 			@$(RM) -rf $(OBJ_DIR)
 			@make clean -C $(LIBFT)
-			@echo "$(MAGENTA) $(NAME) object files cleaned!$(DEF_COLOR)"
+			@echo "$(MAGENTA)🚽 Cleaned $(NAME)$(DEF_COLOR)"
 
 fclean:		clean
 			@$(RM) -f $(NAME)
 			@make fclean -C $(LIBFT)	
-			@echo "$(MAGENTA) $(NAME) cleaned!$(DEF_COLOR)"
+			@echo "$(MAGENTA)🚽 Fcleaned $(NAME)$(DEF_COLOR)"
 
 
 re:			fclean 
