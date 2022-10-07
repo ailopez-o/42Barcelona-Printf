@@ -12,7 +12,7 @@
 # **************************************************************************** #
 #Variables
 
-NAME		= mylib.a
+NAME		= libftprintf.a
 INCLUDE		= inc
 LIBFT		= libft
 SRC_DIR		= src/
@@ -24,6 +24,11 @@ AR			= ar rcs
 
 # Colors
 
+BOLD_PURPLE	=	\033[1;35m
+BOLD_CYAN	=	\033[1;36m
+BOLD_YELLOW	=	\033[1;33m
+NO_COLOR	=	\033[0m
+DEF_COLOR 	= \033[0;39m
 DEF_COLOR = \033[0;39m
 GRAY = \033[0;90m
 RED = \033[0;91m
@@ -47,45 +52,46 @@ DEPS 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 
 OBJF		=	.cache_exists
 
-all:	makelibs
-	@$(MAKE)	$(NAME)
+all:	
+	@Make makelibs
+	@echo "\n🚧 $(BOLD_YELLOW)Starting $(NAME) compilation..\n$(DEF_COLOR)"	
+	@Make $(NAME)
+	@echo "\n🔰 $(GREEN)Printf done!\n$(DEF_COLOR)"
 
 makelibs:	
 			@$(MAKE) -C $(LIBFT)
 			
 -include 	${DEPS}
 $(NAME):	$(OBJ) ${LIBFT}/libft.a $(INCLUDE)/ft_printf.h
-			cp libft/libft.a .
-			mv libft.a $(NAME)
+			@cp libft/libft.a .
+			@mv libft.a $(NAME)
+			@echo "\n🚧 $(BOLD_YELLOW)Linking $(NAME) lib...$(DEF_COLOR)"	
 			@$(AR) $(NAME) $(OBJ)
-			@echo "$(MAGENTA)$(AR) $(NAME) $(OBJ)$(DEF_COLOR)"
-			@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
+			@echo "$(CYAN)$(AR) $(NAME) $(OBJ)$(DEF_COLOR)"
 
 bonus:		
 			@$(MAKE) all
 			
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+			@${CC} ${CFLAGS} -I./ -c $< -o $@
+			@echo " 🔧 $(GRAY)${CC} ${CFLAGS} -I./ -c $< -o $@$(DEF_COLOR)"
 
 $(OBJF):
 			@mkdir -p $(OBJ_DIR)
 
 clean:
-			$(RM) -rf $(OBJ_DIR)
+			@$(RM) -rf $(OBJ_DIR)
 			@make clean -C $(LIBFT)
-			@echo "$(CYAN)ft_printf object files cleaned!$(DEF_COLOR)"
+			@echo "$(MAGENTA) $(NAME) object files cleaned!$(DEF_COLOR)"
 
 fclean:		clean
-			$(RM) -f $(NAME)
-			@echo "$(CYAN)ft_printf executable files cleaned!$(DEF_COLOR)"
-			$(RM) -f $(LIBFT)/libft.a
-			@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
-			${RM} bonus
+			@$(RM) -f $(NAME)
+			@make fclean -C $(LIBFT)	
+			@echo "$(MAGENTA) $(NAME) cleaned!$(DEF_COLOR)"
+
 
 re:			fclean 
 			@$(MAKE)	
-			@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
 
 norm:
 			@norminette $(SRC) $(INCLUDE) $(LIBFT) | grep -v Norme -B1 || true
