@@ -6,7 +6,7 @@
 #    By: ailopez- <ailopez-@student.42barcelon      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/09 16:48:38 by ailopez-          #+#    #+#              #
-#    Updated: 2022/06/03 13:50:22 by aitoraudi        ###   ########.fr        #
+#    Updated: 2024/11/09 13:28:08 by ailopez-         ###   ########.fr        #
 #    Updated: 2022/05/24 00:35:24 by aitorlope        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -53,9 +53,9 @@ DEPS 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_FILES)))
 OBJF		=	.cache_exists
 
 all:	
-	@Make makelibs
+	@make makelibs
 	@echo "\n🎯 $(YELLOW)Starting $(WHITE)[$(NAME)]$(YELLOW) compilation..$(DEF_COLOR)"	
-	@Make $(NAME)
+	@make $(NAME)
 	@echo "\n🔰 $(GREEN)$(NAME) done!\n$(DEF_COLOR)"
 
 makelibs:	
