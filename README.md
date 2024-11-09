@@ -6,6 +6,9 @@
 
 </h1>
 
+Remember to make clone recursive
+git clone --recursive git@github.com:ailopez-o/42Barcelona-Printf.git printf
+
 <p align="center">
 	<b><i>42 Barcelona / Printf with bonus</i></b><br>
 </p>
